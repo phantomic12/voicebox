@@ -22,10 +22,10 @@ jobs:
             args: "--target x86_64-apple-darwin"
             python-version: "3.12"
             backend: "pytorch"
-          # - platform: 'ubuntu-22.04'
-          #   args: ''
-          #   python-version: '3.12'
-          #   backend: 'pytorch'
+          - platform: "ubuntu-latest"
+            args: ""
+            python-version: "3.12"
+            backend: "pytorch"
           - platform: "windows-latest"
             args: ""
             python-version: "3.12"
@@ -36,8 +36,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Free disk space (ubuntu only)
+        if: matrix.platform == 'ubuntu-latest'
+        uses: mathio/gha-cleanup@v1
+
       - name: Install dependencies (ubuntu only)
-        if: matrix.platform == 'ubuntu-22.04'
+        if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf llvm-dev
