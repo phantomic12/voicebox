@@ -39,6 +39,8 @@ jobs:
       - name: Free disk space (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
         uses: mathio/gha-cleanup@v1
+            remove-browsers: true
+    	    verbose: true
 
       - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
